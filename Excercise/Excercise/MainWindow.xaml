@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Excercise"
         mc:Ignorable="d"
-        Title="MainWindow" Height="320" Width="510">
+        Title="Сортировщик" Height="320" Width="510">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
