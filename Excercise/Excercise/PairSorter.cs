@@ -60,7 +60,7 @@ namespace Excercise
                 Log.Add(msg);
 
             }
-            
+
             // Если массив не сортируется, пишем об этом информацию в лог и возвращаем массив
             if (!Sort(pArray, swapPairs))
             {
@@ -100,10 +100,9 @@ namespace Excercise
             var numbers = pArray.ValuesList;
             numbers.Sort();
 
-            var isSwapped = false;
-
+            var isSwapped = true;
             var count = 0;
-            
+
             while (count < 3 && isSwapped)
             {
                 if (pArray.ValuesList.SequenceEqual(numbers)) return true;
@@ -112,17 +111,11 @@ namespace Excercise
                 isSwapped = false;
                 for (var index = 0; index < 3; index++)
                 {
-                    if (
-                        (pArray.Values[index] > pArray.Values[index + 2]) ||
-                        (pArray.Values[index + 1] > pArray.Values[index + 3]) ||
-                        (pArray.Values[index + 1] > pArray.Values[index + 2])
-                        )
+                    if (pArray.Values[index] > pArray.Values[index + 3])
+                    {
                         swapPairs(index, index + 2);
                         isSwapped = true;
-                    if (index < (pArray.ValuesList.Count - 4))
-                        index++;
-                    else
-                        index = 0;
+                    }
                 }
             }
 
