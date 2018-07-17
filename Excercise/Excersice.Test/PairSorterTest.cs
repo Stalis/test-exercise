@@ -20,14 +20,14 @@ namespace Excercise.Test
             if (sortable)
                 Assert.AreEqual(
                     new int[] { 1, 2, 3, 4, 5, 6 },
-                    PairSorter.GetInstance().Sort(array),
-                    string.Join("\n", PairSorter.GetInstance().Log)
+                    PairSorter6.GetInstance().Sort(array),
+                    string.Join("\n", PairSorter6.GetInstance().Log)
                 );
             else
                 Assert.AreEqual(
                     array,
-                    PairSorter.GetInstance().Sort(array),
-                    string.Join("\n", PairSorter.GetInstance().Log)
+                    PairSorter6.GetInstance().Sort(array),
+                    string.Join("\n", PairSorter6.GetInstance().Log)
                     );
         }
     }

@@ -36,13 +36,13 @@ namespace Excercise
             try
             {
                 Task<int[]>.Factory.StartNew(
-                    arg => PairSorter.GetInstance().Sort((int[])arg),
+                    arg => PairSorter6.GetInstance().Sort((int[])arg),
                     ReadInput())
                     .ContinueWith(
                         task =>
                         {
                             logBox.Dispatcher.BeginInvoke(
-                                new Action(() => logBox.Text = string.Join("\n", PairSorter.GetInstance().Log))
+                                new Action(() => logBox.Text = string.Join("\n", PairSorter6.GetInstance().Log))
                                     );
                             logBox.Dispatcher.BeginInvoke(
                                 new Action(

@@ -10,7 +10,7 @@ namespace Excercise
     /// <summary>
     /// Представляет клсасс сортировщика с использованием <see cref="PairArray{T}"/>
     /// </summary>
-    public class PairSorter : Singleton<PairSorter>
+    public class PairSorter6 : Singleton<PairSorter6>
     {
         /// <summary>
         /// Получает список действий, использованных при сортировке
@@ -32,10 +32,9 @@ namespace Excercise
             Debug.Print("Start sorting");
             var pArray = new PairArray<int>(array);
 
-            // Если массив не сортируется, пишем об этом информацию в лог и возвращаем массив
             if (!IsSortable(array))
             {
-                Log.Add($"Нельзя отсортировать массив {pArray}");
+                Log.Add($"Нельзя отсортировать массив {pArray}: количество инверсий нечетно");
                 return pArray.Values;
             }
 
@@ -61,7 +60,13 @@ namespace Excercise
                 Log.Add(msg);
 
             }
-            SortV1(pArray, swapPairs);
+            
+            // Если массив не сортируется, пишем об этом информацию в лог и возвращаем массив
+            if (!Sort(pArray, swapPairs))
+            {
+                Log.Add($"Не удается массив {pArray}");
+                return pArray.Values;
+            }
 
             Log.Add(pArray.ToString());
             Debug.Print("Stop sorting");
@@ -90,25 +95,38 @@ namespace Excercise
             return inversionsCount % 2 == 0;
         }
 
-        private void SortV1(PairArray<int> pArray, Action<int, int> swapPairs)
+        private bool Sort(PairArray<int> pArray, Action<int, int> swapPairs)
         {
             var numbers = pArray.ValuesList;
             numbers.Sort();
 
-            var index = 0;
-            while (!pArray.ValuesList.SequenceEqual(numbers))
+            var isSwapped = false;
+
+            var count = 0;
+            
+            while (count < 3 && isSwapped)
             {
-                if (
-                    (pArray.Values[index] > pArray.Values[index + 2]) ||
-                    (pArray.Values[index + 1] > pArray.Values[index + 3]) ||
-                    (pArray.Values[index + 1] > pArray.Values[index + 2])
-                   )
-                    swapPairs(index, index + 2);
-                if (index < (pArray.ValuesList.Count - 4))
-                    index++;
-                else
-                    index = 0;
+                if (pArray.ValuesList.SequenceEqual(numbers)) return true;
+
+                count++;
+                isSwapped = false;
+                for (var index = 0; index < 3; index++)
+                {
+                    if (
+                        (pArray.Values[index] > pArray.Values[index + 2]) ||
+                        (pArray.Values[index + 1] > pArray.Values[index + 3]) ||
+                        (pArray.Values[index + 1] > pArray.Values[index + 2])
+                        )
+                        swapPairs(index, index + 2);
+                        isSwapped = true;
+                    if (index < (pArray.ValuesList.Count - 4))
+                        index++;
+                    else
+                        index = 0;
+                }
             }
+
+            return pArray.ValuesList.SequenceEqual(numbers);
         }
     }
 }
