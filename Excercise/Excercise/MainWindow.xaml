@@ -5,14 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Excercise"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="320" Width="510">
     <Grid>
-        <TextBlock x:Name="inputTip" Margin="203,21,389,353"/>
-        <TextBlock Text="Входной массив:" Margin="10,80,594,288" TextAlignment="Right"/>
-        <TextBox x:Name="inputBox" Margin="203,80,389,288"/>
-        <TextBlock Text="Выходной массив:" Margin="10,162,594,206" TextAlignment="Right"/>
-        <TextBox x:Name="resultBox" Margin="203,162,389,206"/>
-        <Button x:Name="sortButton" Content="Сортировать" Margin="203,254,389,116" Click="sortButton_Click"/>
-        <TextBox x:Name="logBox" Margin="482,10,10,10"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="10" Orientation="Vertical">
+            <TextBlock Text="Входной массив:" TextAlignment="Center" Margin="10"/>
+            <TextBox x:Name="inputBox" Height="30" KeyDown="inputBox_KeyDown"/>
+            <TextBlock Text="Выходной массив:" TextAlignment="Center" Margin="10"/>
+            <TextBox x:Name="resultBox" Height="30"/>
+            <Button x:Name="sortButton" Content="Сортировать" Click="sortButton_Click" Height="30" HorizontalAlignment="Stretch" Margin="20,10"/>
+            <ProgressBar x:Name="progressBar" Height="10" Margin="10" Visibility="Hidden"/>
+        </StackPanel>
+        <DockPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Лог:" DockPanel.Dock="Top" />
+            <TextBox x:Name="logBox" DockPanel.Dock="Top" />
+        </DockPanel>
     </Grid>
 </Window>

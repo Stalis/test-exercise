@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Excercise;
 
-namespace Excersice.Test
+namespace Excercise.Test
 {
     [TestFixture(new int[] { 5, 4, 1, 6, 3, 2 }, TypeArgs = new Type[] { typeof(int) })]
     public class PairArrayTest<T>

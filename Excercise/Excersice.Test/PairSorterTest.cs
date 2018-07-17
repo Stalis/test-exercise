@@ -6,27 +6,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Excersice.Test
+namespace Excercise.Test
 {
-    [TestFixture(new int[] { 1, 2, 3, 4, 5, 6 })]
-    [TestFixture(new int[] { 6, 5, 4, 3, 2, 1 })]
-    [TestFixture(new int[] { 5, 4, 1, 6, 3, 2 })]
+    [TestFixture]
     class PairSorterTest
     {
-        public int[] TestArray;
-
-        public PairSorterTest(int[] array)
-        {
-            TestArray = array;
-        }
 
         [Test]
-        public void MainTest()
+        [Timeout(1000)]
+        [TestCaseSource(typeof(PairSorterCasesFactory), "TestCases")]
+        public void MainTest(int[] array, bool sortable)
         {
-            Assert.AreEqual(
-                new int[] { 1, 2, 3, 4, 5, 6 },
-                PairSorter.GetInstance().Sort(TestArray)
+            if (sortable)
+                Assert.AreEqual(
+                    new int[] { 1, 2, 3, 4, 5, 6 },
+                    PairSorter.GetInstance().Sort(array),
+                    string.Join("\n", PairSorter.GetInstance().Log)
                 );
+            else
+                Assert.AreEqual(
+                    array,
+                    PairSorter.GetInstance().Sort(array),
+                    string.Join("\n", PairSorter.GetInstance().Log)
+                    );
+        }
+    }
+
+    public class PairSorterCasesFactory
+    {
+        public static IEnumerable<TestCaseData> TestCases { 
+            get {
+                yield return new TestCaseData(new int[] { 6, 5, 4, 3, 2, 1 }, false);
+                yield return new TestCaseData(new int[] { 2, 6, 4, 1, 3, 5 }, false);
+                yield return new TestCaseData(new int[] { 1, 2, 3, 4, 5, 6 }, true);
+                yield return new TestCaseData(new int[] { 5, 4, 1, 6, 3, 2 }, true);
+                yield return new TestCaseData(new int[] { 1, 2, 4, 6, 5, 3 }, true);
+                yield return new TestCaseData(new int[] { 6, 5, 4, 3, 1, 2 }, true);
+            }
         }
     }
 }

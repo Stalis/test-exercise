@@ -16,6 +16,7 @@ namespace Excercise
         /// Получает массив с текущим положением значений
         /// </summary>
         public T[] Values { get; private set; }
+
         /// <summary>
         /// Получает массив с текущим положением значений
         /// </summary>
@@ -45,13 +46,12 @@ namespace Excercise
         /// </summary>
         /// <param name="pair">пара значений</param>
         /// <param name="index">индекс первого элемента пары</param>
-        public void SetPair(Tuple<T, T> pair, int index)
+        private void SetPair(Tuple<T, T> pair, int index)
         {
             if (!CheckPair(index)) throw new PairNotValidException();
             Values[index] = pair.Item1;
             Values[index + 1] = pair.Item2;
         }
-
 
         /// <summary>
         /// Меняет указанные пары местами
@@ -86,15 +86,17 @@ namespace Excercise
             (index < Values.Count() - 1) && (index >= 0);
 
         public override string ToString() =>
-            string.Join(",", from item in Values
+            string.Join("", from item in Values
                              select item.ToString());
-    }
 
-    class PairsIntersectException : Exception
-    {
+        /// <summary>
+        /// Представляет класс исключения пересечения пар
+        /// </summary>
+        class PairsIntersectException : Exception { }
 
-    }
-
-    class PairNotValidException : Exception {
+        /// <summary>
+        /// Представляет класс исключения неверной пары
+        /// </summary>
+        class PairNotValidException : Exception { }
     }
 }
