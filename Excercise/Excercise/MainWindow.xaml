@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Excercise"
         mc:Ignorable="d"
-        Title="Сортировщик" Height="320" Width="510">
+        Title="Сортировщик" Height="320" Width="380">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -21,7 +21,7 @@
         </StackPanel>
         <DockPanel Grid.Column="1" Margin="10">
             <TextBlock Text="Лог:" DockPanel.Dock="Top" />
-            <TextBox x:Name="logBox" DockPanel.Dock="Top" />
+            <TextBox x:Name="logBox" DockPanel.Dock="Top" TextWrapping="Wrap" />
         </DockPanel>
     </Grid>
 </Window>
